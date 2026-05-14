@@ -27,3 +27,20 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    grouped = {}
+
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            
+            column = line.split('\t')
+            letter = column[0]
+            num = int(column[1])
+
+            if num not in grouped:
+                grouped[num] = []
+            if letter not in grouped[num]:
+                grouped[num].append(letter)
+    result = []
+    for num in sorted(grouped.keys()):
+        result.append((num, sorted(grouped[num])))  
+    return result

@@ -26,3 +26,30 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    values = {}
+
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+                      
+            column = line.split('\t')
+           
+            elements = column[4].strip().split(',')
+
+            for item in elements:
+               
+                key, value_str = item.split(':')
+                value = int(value_str)
+
+                if key in values:
+                    max_p, min_p = values[key]
+                    if value > max_p:
+                        max_p = value
+                    if value < min_p:
+                        min_p = value
+                    values[key] = (max_p, min_p)
+                else:
+                    values[key] = (value, value)
+
+    
+    result = [(key, v[1], v[0]) for key, v in sorted(values.items())]
+    return result

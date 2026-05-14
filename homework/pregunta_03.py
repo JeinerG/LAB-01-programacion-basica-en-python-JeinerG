@@ -15,3 +15,16 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+    sum_column2 = {} 
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            column = line.split('\t')
+            sum = int(column[1])
+            letter=column[0]
+            if letter in sum_column2:
+                sum_column2[letter] += sum 
+            else:
+                sum_column2[letter] = sum  
+
+    result = sorted(sum_column2.items()) 
+    return result
